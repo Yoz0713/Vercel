@@ -9,7 +9,8 @@ import { About } from "./about/about"
 import { Menu } from "./share_components/menu"
 import { Footer } from "./share_components/footer"
 import { Portfilio } from './portfolio';
-
+import { Hamburger } from './share_components/hamburger';
+import { ActiveMenu } from './share_components/activeMenu';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 function App (){
   let location = useLocation()
@@ -39,7 +40,12 @@ function App (){
 root.render(
   <BrowserRouter>
     <App />
-    <Menu />
+     <ActiveMenu>
+      <Hamburger/>
+        <Menu />
+     </ActiveMenu>
+     
+  
     <Footer />
   </BrowserRouter>
   

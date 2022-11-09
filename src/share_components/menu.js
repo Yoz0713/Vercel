@@ -1,10 +1,12 @@
-import React,{useState,useLayoutEffect,useRef,useEffect} from "react";
+import React,{useState,useLayoutEffect,useRef,useEffect,useContext} from "react";
 import logo1 from "../home/img/SVG/logo_01.svg"
 import logo2 from "../home/img/SVG/logo_02.svg"
 import { Link,useLocation} from "react-router-dom";
 import { gsap} from "gsap"
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import {SplitText} from "./splitText"
+import { isactive } from "./activeMenu"
+
 gsap.registerPlugin(ScrollTrigger);
 function Menu(props){
 
@@ -13,9 +15,11 @@ function Menu(props){
     let h = useLocation()
     h = h.pathname
     let [menuEn] = useState([`ABOUT`,`PORTFOLIO`,`SERVICE`,`BLOG`,`NEWS`,`CONTACT`])
-    console.log(menuEn)
+    let toggle = useContext(isactive)
+
     useEffect(()=>{
         window.scrollTo(0,0)
+      
     })
     useLayoutEffect(()=>{
         let ctx = gsap.context(()=>{
@@ -85,7 +89,7 @@ function Menu(props){
         return()=> ctx.revert()
     })
     return(
-        <div className="menu" ref={menu}>
+        <div className={`menu ${toggle.menuToggle? "is-active2":null}` }ref={menu}>
             <ul>
                 <li className={h === "/" ? "menu-logo a" : "menu-logo"} onClick={()=>{
                   let getJSON = async(url) => {
